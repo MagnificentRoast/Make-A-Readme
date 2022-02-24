@@ -1,25 +1,89 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-function renderLicenseBadge(license) {
-  if (license) {}
-}
+// I'm going to attempt to refactor code here.
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license) {}
+// generates the license badge based on user input, or it will be blank if no input
+const renderLicenseBadge = license => {
+  if (license) {
+    return `![${license} License](https:shields.io/license-${license.split(' ').join('%20')}-blue)
+    `;
+  } else {
+    return '';
+  }
+};
+// generates the description section in readme
+  const renderLicenseSection = (title, description, link) => {
+  if (link) {
+    return `${description}
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {}
+    View the deployed page at [${title}](${link})`;
+  } else {
+    return `${description}`;
+  }
+};
+// Create a table of contents
+const renderTableOfContents = contentsArr => {
+  // content list items appear based on user input
+  let listContents = '';
+  contentsArr.forEach((item) => {
 
-// TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
-  return `# ${data.title}
+    // indents screenshots
+    if (item.content && item.header === 'Screenshots') {
+      listContents += `  * [${item.header}](#${(item.header).toLowerCase()})
+      `;
+    } else if (item.content) {
+      listContents += `* [${item.header}](#${(item.header).toLowerCase().split(' ').join('-')})
+      `;
+    }
+  });
+  // stops the function returning the table of contents
+  return listContents;
+};
+// Renders an installation guide
+const renderInstallationGuide = installation => {
+  if (installation) {
+    return `To use this application, please install:
+    \`\`\`
+    ${installation}
+    \`\`\``
+  } else {
+    return '';
+  }
+};
 
-`;
-}
-
+// Exports generateMarkdown as a module for index.js
 module.exports = generateMarkdown;
+
+// // TODO: Create a function that returns a license badge based on which license is passed in
+// // If there is no license, return an empty string
+// //Below, and on the other lines that start with function are commented out for reference, it will be replaced with const. This doesn't apply to all lines, only for rendering the licenses and doingb the markdown generation
+// // function renderLicenseBadge(license) {}
+// const renderLicenseBadge = license => {
+//   if (license) {
+//     return `![${license} License](https://shields.io/license-${license.split(' ').join('%20')}-blue)
+//     `;
+//   } else {
+//     return '';
+//   }
+// }
+
+// // TODO: Create a function that returns the license link
+// // If there is no license, return an empty string
+// // function renderLicenseLink(license) {}
+// const renderLicenseLink = license => {}
+
+// // TODO: Create a function that returns the license section of README
+// // If there is no license, return an empty string
+// // function renderLicenseSection(license) {}
+// const renderLicenseSection = license => {}
+
+// // TODO: Create a function to generate markdown for README
+// // function generateMarkdown(data) {
+// //   return `# ${data.title}
+
+// // `;
+// // }
+// const generateMarkdown = data => {}
+
+// module.exports = generateMarkdown;
 
 // # <Your-Project-Title>
 
