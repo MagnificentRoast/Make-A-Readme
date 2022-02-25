@@ -48,6 +48,154 @@ const renderInstallationGuide = installation => {
     return '';
   }
 };
+// Renders screenshot sections
+const renderScreenshot = screenshotObj => {
+  let screenshotArr = '';
+  if (screenshotObj) {
+    screenshotObj.forEach(shot => {
+    screenshotArr += `[!${shot.addAltToScreenshotInput}](${shot.linkToScreenshot})
+    ${shot.descScreenshot}
+    `;
+    });
+    return `${screenshotArr}`;
+  } else {
+    return '';
+  }
+};
+// renders built with section
+const renderBuiltWith = builtWith => {
+  let allTech = '';
+
+  if (builtWith) {
+    bultWith.forEach(item => {
+      allTech += `
+    * ${item}`
+    });
+    return `${allTech}`;
+  } else {
+    return '';
+  };
+};
+// renders usage section
+const renderUsageSection = (usageInput, screenshots) => {
+  return `${usageInput} ${screenshotCreation(screenshots)}`
+};
+
+// renders license section
+const renderLicenseSection = licenses => {
+  if (licenses) {
+    return `This application is licensed under the ${licenses} license.`;
+  } else {
+    return '';
+  }
+};
+// creates how to test section
+const renderTests = tests => {
+  if (tests) {
+    return `To run tests on this application, install
+    \`\`\`
+    ${tests}
+    \`\`\`
+    and run \`npm run test\` from the command line.`
+  } else {
+    return '';
+  };
+};
+// renders a questions section
+const renderQuestions = (email, github, repo) => {
+  // requests an email address
+  if (email) {
+    return `If you have any questions about the repo, please [open an issue](https://github.com/${github}/${repo}/issues) or contact me via email at ${email}. You can find more of my work on my GitHub, [${github}](https://github.com/${github}/.)`
+  } else {
+    return '';
+  }
+};
+
+// credits section
+const renderCredits = creditsItem => {
+  let creditsArr = '';
+  if (creditsItem) {
+    creditsItem.forEach((credit) => {
+      creditsArr += `* [${credit.creditNames}](${credit.creditsLink})
+  `;
+    });
+    return creditsArr;
+  } else {
+    return '';
+  }
+};
+// generate markdown
+function generateMarkdown(data) {
+  const { title, github, repo, license } = data;
+  let readmeContent = '';
+  const sectionsArr = [
+    {
+      header: 'Installation',
+      content: createInstallation(data.installation)
+    },
+    {
+      header: 'Usage',
+      content: createUsage(data.usage)
+    },
+    {
+      header: 'Screenshots',
+      content: createScreenshots(data.screenshots)
+    },
+    {
+      header: 'Built With',
+      content: createBuiltWith(data['built with'])
+    },
+    {
+      header: 'License',
+      contennt: createLicense(license)
+    },
+    {
+      header: 'Contributing',
+      content: data.contributing
+    },
+    {
+      header: 'Tests',
+      content: createTest(data.tests)
+    },
+    {
+      header: 'Questions',
+      content: createQuestions(data.questions, github, repo)
+    },
+    {
+      header: 'Credits',
+      content: createCredits(data.credits)
+    },
+  ];
+
+  // adds each section dependents on if there are contents in each section
+  sectionsArr.forEach((sectionItem) => {
+    if (sectionItem.content && sectionItem.header === 'Screenshots') {
+      readmeContent += `### ${sectionItem.header}
+    ${sectionItem.content}
+    `
+        } else if (sectionItem.content) {
+          readmeContents += `## ${sectionItem.header}
+        ${sectionItem.content}
+
+        `;
+              }
+  });
+  return `# ${title}
+[![Issues](https://img.shields.io/github/issues/${github}/${
+  repo
+})](https://github.com/${github}/${
+  repo
+}/issues) [![Issues](https://img.shields.io/github/contributers/${
+  github
+}/${repo})](https://github.com/${github}/${
+  repo
+}/graphs/contributers ${addLicenseBadge(license)}
+## Description
+${createDescription(title, data.description, data.link)}
+## Contents
+${createTableofContents(sectionsArr)}
+${readmeContent}`;
+}
 
 // Exports generateMarkdown as a module for index.js
 module.exports = generateMarkdown;
