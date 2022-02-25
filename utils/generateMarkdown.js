@@ -82,7 +82,7 @@ const renderUsageSection = (usageInput, screenshots) => {
 };
 
 // renders license section
-const renderLicenseSection = licenses => {
+const renderLicensesSection = licenses => {
   if (licenses) {
     return `This application is licensed under the ${licenses} license.`;
   } else {

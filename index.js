@@ -1,7 +1,29 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require("fs");
-const generateMarkdown = require('../utils/generateMarkdown.js')
+const generateMarkdown = require('./utils/generateMarkdown.js');
+// const Sentry = require("@Sentry/node");
+// const Tracing = require("@Sentry/tracing");
+
+// Sentry.init({
+//     dsn: "https://4fd2532bbdee4c0fa2bc4fed5bdfc5fa@o1152802.ingest.sentry.io/6231188",
+//     tracesSampleRate: 1.0,
+// });
+
+// const transaction = Sentry.startTransaction({
+//     op: "test",
+//     name: "My first test transaction",
+// });
+
+// setTimeout(() => {
+//     try {
+//         foo();
+//     } catch (e) {
+//         Sentry.captureException(e);
+//     } finally {
+//         transaction.finish();
+//     }
+// });
 
 // TODO: Create an array of questions for user input
 const questions = [
