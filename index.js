@@ -401,15 +401,13 @@ screenshotAdd = readmeData => {
     };
 
 // TODO: Create a function to write README file
-    function writeToFile(fileName, data) {
-        fs.writeFile(`./dist/${fileName}`, data, err => {
-            if (err) {
-                throw err
-            };
-            console.log('README.md created successfully! Check the readme file in the directory to see it!')
-        });
-    };
-
+function writeToFile(fileName, data) {
+    fs.writeFile(`./dist/${fileName}`, data, err => {
+        if (err) {
+            throw err
+        };
+    })
+}
 // TODO: Create a function to initialize app
 function init() {
     return inquirer.prompt(questions);

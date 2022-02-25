@@ -78,7 +78,7 @@ const renderBuiltWith = builtWith => {
 };
 // renders usage section
 const renderUsageSection = (usageInput, screenshots) => {
-  return `${usageInput} ${screenshotCreation(screenshots)}`
+  return `${usageInput} ${renderScreenshot(screenshots)}`
 };
 
 // renders license section
@@ -131,23 +131,23 @@ function generateMarkdown(data) {
   const sectionsArr = [
     {
       header: 'Installation',
-      content: createInstallation(data.installation)
+      content: renderInstallationGuide(data.installation)
     },
     {
       header: 'Usage',
-      content: createUsage(data.usage)
+      content: renderUsageSection(data.usage)
     },
     {
       header: 'Screenshots',
-      content: createScreenshots(data.screenshots)
+      content: renderScreenshot(data.screenshots)
     },
     {
       header: 'Built With',
-      content: createBuiltWith(data['built with'])
+      content: renderBuiltWith(data['built with'])
     },
     {
       header: 'License',
-      contennt: createLicense(license)
+      contennt: renderLicensesSection(license)
     },
     {
       header: 'Contributing',
@@ -155,15 +155,15 @@ function generateMarkdown(data) {
     },
     {
       header: 'Tests',
-      content: createTest(data.tests)
+      content: renderTests(data.tests)
     },
     {
       header: 'Questions',
-      content: createQuestions(data.questions, github, repo)
+      content: renderQuestions(data.questions, github, repo)
     },
     {
       header: 'Credits',
-      content: createCredits(data.credits)
+      content: renderCredits(data.credits)
     },
   ];
 
@@ -174,7 +174,7 @@ function generateMarkdown(data) {
     ${sectionItem.content}
     `
         } else if (sectionItem.content) {
-          readmeContents += `## ${sectionItem.header}
+          readmeContent += `## ${sectionItem.header}
         ${sectionItem.content}
 
         `;
@@ -189,11 +189,11 @@ function generateMarkdown(data) {
   github
 }/${repo})](https://github.com/${github}/${
   repo
-}/graphs/contributers ${addLicenseBadge(license)}
+}/graphs/contributers ${renderLicenseBadge(license)}
 ## Description
-${createDescription(title, data.description, data.link)}
+${renderLicenseSection(title, data.description, data.link)}
 ## Contents
-${createTableofContents(sectionsArr)}
+${renderTableOfContents(sectionsArr)}
 ${readmeContent}`;
 }
 
