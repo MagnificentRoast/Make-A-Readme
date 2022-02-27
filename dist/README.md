@@ -1,9 +1,9 @@
 
-  # readme generator
+  # test
 
   ## Description
 
-  this makes a simple readme file
+  test
   
   ## Table of Contents
 
@@ -34,11 +34,11 @@
 
   To run tests, please run the following commands:
   ```
-  test this project by running
+  test
   ```
 
   ## Questions
   If you have any questions about this repo, please contact 
   [MagnificentRoast](undefined) 
-  Email me at: magnificentroast@gmaiol.com.
+  Email me at: magnificentroast@gmail.com.
   
