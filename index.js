@@ -97,6 +97,21 @@ const questions = [
             }
         }
     },
+    // make a built with here
+    {
+        type: 'checkbox',
+        name: 'Built With',
+        message: 'What was this application built with?',
+        choices: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'ES6', 'Bootstrap', 'jQuery', 'Python', 'React.js'],
+        validate: builtWithInput => {
+            if (builtWithInput) {
+                return true;
+            } else {
+                console.log('Please select what this application was built with!');
+                return false;
+            }
+    }
+    },
     // license
     {
         type: 'list',
